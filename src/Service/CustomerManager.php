@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Constant\PaginationConstant;
+use App\Entity\Country;
 use App\Entity\Customer;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\Pagination\PaginationInterface;
@@ -16,18 +17,57 @@ class CustomerManager implements CustomerManagerInterface
     /** @var EntityManagerInterface */
     private $entityManager;
 
-    public function __construct(PaginatorInterface $paginator, EntityManagerInterface $entityManager)
+    /**
+     * @var CustomerDataBuilderInterface
+     */
+    private $customerDataBuilder;
+
+    public function __construct(PaginatorInterface $paginator, EntityManagerInterface $entityManager, CustomerDataBuilderInterface $customerDataBuilder)
     {
         $this->paginator = $paginator;
         $this->entityManager = $entityManager;
+        $this->customerDataBuilder = $customerDataBuilder;
     }
 
-    public function list(int $page = PaginationConstant::DEFAULT_PAGE, int $limit = PaginationConstant::DEFAULT_LIMIT): PaginationInterface
+    public function list(array $filters, int $page = PaginationConstant::DEFAULT_PAGE, int $limit = PaginationConstant::DEFAULT_LIMIT): PaginationInterface
     {
-        return $this->paginator->paginate(
-            $this->entityManager->getRepository(Customer::class)->list(),
+        $paginatedCustomers = $this->paginator->paginate(
+            $this->entityManager->getRepository(Customer::class)->list($filters),
             $page,
             $limit
         );
+
+        return $this->buildPaginatedCustomers($paginatedCustomers);
+    }
+
+    private function buildPaginatedCustomers($paginatedCustomers): PaginationInterface
+    {
+        $builtPaginatedCustomers = [];
+
+        /** @var Customer $customer */
+        foreach ($paginatedCustomers->getItems() as $customer) {
+            $builtPaginatedCustomers []= $this->customerDataBuilder->build($customer, $this->getCounty($customer->getPhone()));
+        }
+
+        $paginatedCustomers->setItems($builtPaginatedCustomers);
+
+        return $paginatedCustomers;
+    }
+
+    /**
+     * @param string $phoneNumber
+     *
+     * @return Country|null
+     */
+    public function getCounty(string $phoneNumber): ?Country
+    {
+        $code =  preg_match('~(\K\d+)~', $phoneNumber, $out) ? $out[0] : null;
+
+        if (!$code) {
+            return null;
+        }
+        return $this->entityManager->getRepository(Country::class)->findOneBy([
+            'code' => $code,
+        ]);
     }
 }

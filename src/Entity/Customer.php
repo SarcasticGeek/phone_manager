@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\CustomerRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\Index;
 
 /**
  * @ORM\Entity(repositoryClass=CustomerRepository::class)
+ * @ORM\Table(name="customer", indexes={@Index(columns={"country_code"})})
  */
 class Customer
 {
@@ -31,7 +33,13 @@ class Customer
      * @var bool
      * @ORM\Column(type="boolean", options={"default" : 0})
      */
-    private $has_valid_phone = false;
+    private $hasValidPhone = false;
+
+    /**
+     * @var null|string
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $countryCode;
 
     /**
      * @return int|null
@@ -86,17 +94,37 @@ class Customer
      */
     public function isHasValidPhone(): bool
     {
-        return $this->has_valid_phone;
+        return $this->hasValidPhone;
     }
 
     /**
-     * @param bool $has_valid_phone
+     * @param bool $hasValidPhone
      *
      * @return Customer
      */
-    public function setHasValidPhone(bool $has_valid_phone): Customer
+    public function setHasValidPhone(bool $hasValidPhone): Customer
     {
-        $this->has_valid_phone = $has_valid_phone;
+        $this->hasValidPhone = $hasValidPhone;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCountryCode(): ?string
+    {
+        return $this->countryCode;
+    }
+
+    /**
+     * @param string|null $countryCode
+     *
+     * @return Customer
+     */
+    public function setCountryCode(?string $countryCode): Customer
+    {
+        $this->countryCode = $countryCode;
 
         return $this;
     }

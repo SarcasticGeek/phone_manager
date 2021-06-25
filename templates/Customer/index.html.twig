@@ -4,12 +4,39 @@
     <h1>Customers</h1>
 
     {% block content %}
+        {% set route = app.request.attributes.get('_route') %}
+        {% set all_query = app.request.query.all %}
+
+        <div class="row">
+            <div class="col-sm-6 pull-right">
+                Country:
+                <select class="form-select"onchange="javascript:location.href = this.value;">
+                    <option value="{{ path(route, all_query | merge({'countryCode': null})) }}" {% if not app.request.query.has('countryCode') %} selected {% endif %}>All</option>
+                    {% for country in countries %}
+                        <option value="{{ path(route, all_query | merge({'countryCode': country.code})) }}" {% if app.request.query.get('countryCode') == country.code %} selected {% endif %}>{{ country.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="col-sm-6 pull-right">
+                Valid Phone Number:
+                <select class="form-select"onchange="javascript:location.href = this.value;">
+                    <option value="{{ path(route, all_query | merge({'hasValidPhone': null})) }}" {% if not app.request.query.has('hasValidPhone') %} selected {% endif %}>All</option>
+                    <option value="{{ path(route, all_query | merge({'hasValidPhone': 1})) }}" {% if app.request.query.get('hasValidPhone') %} selected {% endif %}>OK</option>
+                    <option value="{{ path(route, all_query | merge({'hasValidPhone': 0})) }}" {% if app.request.query.has('hasValidPhone') and not app.request.query.get('hasValidPhone') %} selected {% endif %}>NOK</option>
+                </select>
+            </div>
+        </div>
+
         <table class="table table-striped">
             <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
+                <th scope="col">Country</th>
                 <th scope="col">State</th>
+                <th scope="col">Country Code</th>
+                <th scope="col">Phone Number</th>
             </tr>
             </thead>
             <tbody>
@@ -17,7 +44,10 @@
                 <tr>
                     <td>{{ customer.id }}</td>
                     <td>{{ customer.name }}</td>
-                    <td>{{ customer.hasValidPhone ? "OK" : "NOT OK" }}</td>
+                    <td>{{ customer.country }}</td>
+                    <td>{{ customer.state ? "OK" : "NOK" }}</td>
+                    <td>{{ customer.countryCode }}</td>
+                    <td>{{ customer.phone }}</td>
                 </tr>
             {% endfor %}
             </tbody>

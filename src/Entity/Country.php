@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\CountryRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\UniqueConstraint;
 
 /**
  * @ORM\Entity(repositoryClass=CountryRepository::class)
+ * @ORM\Table(name="country", uniqueConstraints={@UniqueConstraint(name="code_unique", columns={"code"})})
  */
 class Country
 {
