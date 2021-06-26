@@ -4,8 +4,6 @@ namespace App\Tests\Service;
 
 use App\Repository\CountryRepository;
 use App\Service\CountryManager;
-use Doctrine\ORM\EntityManager;
-use Doctrine\Persistence\ManagerRegistry;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 
