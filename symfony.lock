@@ -88,6 +88,12 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
     },
+    "fzaninotto/faker": {
+        "version": "v1.9.2"
+    },
+    "hamcrest/hamcrest-php": {
+        "version": "v2.0.1"
+    },
     "knplabs/knp-components": {
         "version": "v3.1.0"
     },
@@ -102,6 +108,9 @@
     },
     "laminas/laminas-zendframework-bridge": {
         "version": "1.1.1"
+    },
+    "mockery/mockery": {
+        "version": "1.4.3"
     },
     "monolog/monolog": {
         "version": "2.2.0"

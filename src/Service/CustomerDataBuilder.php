@@ -35,8 +35,20 @@ class CustomerDataBuilder implements CustomerDataBuilderInterface
         $customerData->setName($customer->getName());
         $customerData->setCountry($country->getName());
         $customerData->setPhone($customer->getPhone());
-        $customerData->setState($this->phoneValidator->valid($customer->getPhone(), $country->getRegex()));
+        $customerData->setState(
+            $this->getPhoneValidator()->valid($customer->getPhone(), $country->getRegex())
+        );
 
         return $customerData;
     }
+
+    /**
+     * @return PhoneValidatorInterface
+     */
+    public function getPhoneValidator(): PhoneValidatorInterface
+    {
+        return $this->phoneValidator;
+    }
+
+
 }

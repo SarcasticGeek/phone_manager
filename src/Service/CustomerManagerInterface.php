@@ -19,4 +19,10 @@ interface CustomerManagerInterface
      * @return Country|null
      */
     public function getCounty(string $phoneNumber): ?Country;
+
+    /**
+     * @param string $phoneNumber
+     * @return string|null
+     */
+    public function extractPhoneCode(string $phoneNumber): ?string;
 }

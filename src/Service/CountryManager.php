@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Country;
+use App\Repository\CountryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class CountryManager implements CountryManagerInterface
@@ -25,6 +26,24 @@ class CountryManager implements CountryManagerInterface
      */
     public function getAll(): array
     {
-        return $this->entityManager->getRepository(Country::class)->findAll();
+        return $this->getRepository()
+            ->findAll()
+        ;
+    }
+
+    /**
+     * @return CountryRepository
+     */
+    public function getRepository(): CountryRepository
+    {
+        return $this->getEntityManager()->getRepository(Country::class);
+    }
+
+    /**
+     * @return EntityManagerInterface
+     */
+    public function getEntityManager(): EntityManagerInterface
+    {
+        return $this->entityManager;
     }
 }

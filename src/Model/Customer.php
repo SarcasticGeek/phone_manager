@@ -5,7 +5,7 @@ namespace App\Model;
 class Customer
 {
     /**
-     * @var int
+     * @var null|int
      */
     private $id;
 
@@ -35,18 +35,18 @@ class Customer
     private $phone;
 
     /**
-     * @return int
+     * @return null|int
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
+     * @param null|int $id
      * @return Customer
      */
-    public function setId(int $id): Customer
+    public function setId(?int $id): Customer
     {
         $this->id = $id;
         return $this;

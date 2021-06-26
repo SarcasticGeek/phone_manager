@@ -14,4 +14,9 @@ interface CustomerDataBuilderInterface
      * @return CustomerModel
      */
     public function build(CustomerEntity $customer, ?Country $country): CustomerModel;
+
+    /**
+     * @return PhoneValidatorInterface
+     */
+    public function getPhoneValidator(): PhoneValidatorInterface;
 }
