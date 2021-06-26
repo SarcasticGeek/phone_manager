@@ -16,11 +16,12 @@
 - run `yarn encore dev`
 - run `php -S localhost:8888 -t public`
 - then go to `http://localhost:8888/customers?countryCode=251&hasValidPhone=0`
-
+- then run this patch `bin/console app:patch:validate-phones`
 
 ### OR using Docker
 - `docker-compose up -d`
 - `docker-compose restart composer`
+- run this patch `docker-compose exec php bin/console app:patch:validate-phones`
 - then go to `http://localhost:8888/customers?countryCode=251&hasValidPhone=0`
 
 ### how to test
