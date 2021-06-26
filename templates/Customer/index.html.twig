@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Customers</h1>
+    <h1>Phone numbers</h1>
 
     {% block content %}
         {% set route = app.request.attributes.get('_route') %}
@@ -9,7 +9,7 @@
 
         <div class="row">
             <div class="col-sm-6 pull-right">
-                Country:
+                Select Country:
                 <select class="form-select"onchange="javascript:location.href = this.value;">
                     <option value="{{ path(route, all_query | merge({'countryCode': null})) }}" {% if not app.request.query.has('countryCode') %} selected {% endif %}>All</option>
                     {% for country in countries %}
@@ -19,7 +19,7 @@
             </div>
 
             <div class="col-sm-6 pull-right">
-                Valid Phone Number:
+                Valid Phone Numbers:
                 <select class="form-select"onchange="javascript:location.href = this.value;">
                     <option value="{{ path(route, all_query | merge({'hasValidPhone': null})) }}" {% if not app.request.query.has('hasValidPhone') %} selected {% endif %}>All</option>
                     <option value="{{ path(route, all_query | merge({'hasValidPhone': 1})) }}" {% if app.request.query.get('hasValidPhone') %} selected {% endif %}>OK</option>
@@ -31,8 +31,6 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
                 <th scope="col">Country</th>
                 <th scope="col">State</th>
                 <th scope="col">Country Code</th>
@@ -42,8 +40,6 @@
             <tbody>
             {% for customer in pagination %}
                 <tr>
-                    <td>{{ customer.id }}</td>
-                    <td>{{ customer.name }}</td>
                     <td>{{ customer.country }}</td>
                     <td>{{ customer.state ? "OK" : "NOK" }}</td>
                     <td>{{ customer.countryCode }}</td>

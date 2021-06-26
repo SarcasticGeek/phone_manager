@@ -1,0 +1,26 @@
+version: '2'
+services:
+    php:
+        build: ./php-fpm
+        volumes:
+            - ./:/var/www/phone_manager
+            - ./php-fpm/php.ini:/usr/local/etc/php/php.ini
+        networks:
+            - app-network
+    composer:
+        image: composer:1.9
+        command: ["composer", "install"]
+    web:
+        image: nginx:latest
+        ports:
+            - "8888:80"
+        volumes:
+            - ./:/var/www/phone_manager
+            - ./nginx/app.conf:/etc/nginx/conf.d/default.conf
+        depends_on:
+            - php
+        networks:
+            - app-network
+networks:
+    app-network:
+        driver: bridge
