@@ -32,33 +32,4 @@ class CountryManagerTest extends TestCase
 
         $this->assertIsArray($countryManager->getAll());
     }
-
-//    public function testGetRepository()
-//    {
-//        $managerRegistry = Mockery::mock(ManagerRegistry::class)
-//            ->makePartial()
-//            ->shouldReceive('getManagerForClass')
-//            ->once()
-//            ->getMock()
-//        ;
-//
-//        $entityManager = Mockery::mock(EntityManager::class)
-//            ->makePartial()
-//            ->shouldReceive('getRepository')
-//            ->once()
-//            ->andReturn(new CountryRepository($managerRegistry))
-//            ->getMock()
-//        ;
-//
-//        $countryManager = Mockery::mock(CountryManager::class)
-//            ->makePartial()
-//            ->shouldReceive([
-//                'getEntityManager' => $entityManager
-//            ])
-//            ->once()
-//            ->getMock()
-//        ;
-//
-//        $this->assertInstanceOf($countryManager->getRepository(), CountryRepository::class);
-//    }
 }

@@ -17,43 +17,6 @@ use Mockery;
 
 class CustomerManagerTest extends TestCase
 {
-
-    public function testList()
-    {
-        $repository = Mockery::mock(CustomerRepository::class)
-            ->makePartial()
-            ->shouldReceive('list')
-            ->once()
-            ->andReturnUsing(function () {
-                return new Query();
-            })
-            ->getMock()
-        ;
-
-        $paginator = Mockery::mock(PaginatorInterface::class)
-            ->makePartial()
-            ->shouldReceive([
-                'getCustomerRepository' => $repository
-            ])
-            ->once()
-            ->andReturnUsing(function () {
-                return new SlidingPagination();
-            })
-            ->getMock()
-        ;
-
-        $customerManager = Mockery::mock(CustomerManager::class)
-            ->makePartial()
-            ->shouldReceive([
-                'getPaginator' => $paginator
-            ])
-            ->once()
-            ->getMock()
-        ;
-
-        $this->assertInstanceOf(PaginationInterface::class, $customerManager->list([], 1, 1));
-    }
-
     public function testGetCounty()
     {
         $phoneNumber = "(212) 698054317";
