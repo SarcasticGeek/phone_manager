@@ -20,12 +20,12 @@
 
 ### OR using Docker
 - `docker-compose up -d`
-- `docker-compose restart composer`
 - run this patch `docker-compose exec php bin/console app:patch:validate-phones`
 - then go to `http://localhost:8888/customers?countryCode=251&hasValidPhone=0`
 
 ### how to test
 - run ` ./bin/phpunit` 
+- or with docker `docker-compose exec php bin/phpunit`
 - the all unit and integration tests in `tests` folder
 - TODO (running phpunit with CI 3rd party)
 

@@ -1,15 +1,12 @@
 version: '2'
 services:
     php:
-        build: ./php-fpm
+        build: ./
         volumes:
             - ./:/var/www/phone_manager
             - ./php-fpm/php.ini:/usr/local/etc/php/php.ini
         networks:
             - app-network
-    composer:
-        image: composer:1.9
-        command: ["composer", "install"]
     web:
         image: nginx:latest
         ports:

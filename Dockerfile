@@ -13,9 +13,19 @@ RUN apk update \
 
 CMD ["php-fpm", "-F"]
 
+COPY composer.json /var/www/phone_manager/
+
+COPY composer.lock /var/www/phone_manager/
+
 WORKDIR /var/www/phone_manager
 
 RUN composer install
+
+COPY package.json /var/www/phone_manager/
+
+COPY yarn.lock /var/www/phone_manager/
+
+COPY webpack.config.js /var/www/phone_manager/
 
 RUN yarn install
 
