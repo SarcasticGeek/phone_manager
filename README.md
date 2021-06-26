@@ -10,6 +10,15 @@
 
 ### Structure 
 
+#### Entities
+![Entities](./imgs/Entity.png)
+
+#### Models
+![Models](./imgs/Model.png)
+
+#### Services
+![Services](./imgs/Service.png)
+
 ### How to setup
 - run `composer install`
 - run `yarn install`
