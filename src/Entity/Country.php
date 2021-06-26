@@ -34,16 +34,26 @@ class Country
      */
     private $regex;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     * @return $this
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -51,11 +61,18 @@ class Country
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getCode(): ?string
     {
         return $this->code;
     }
 
+    /**
+     * @param string $code
+     * @return $this
+     */
     public function setCode(string $code): self
     {
         $this->code = $code;
@@ -63,11 +80,18 @@ class Country
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getRegex(): ?string
     {
         return $this->regex;
     }
 
+    /**
+     * @param string $regex
+     * @return $this
+     */
     public function setRegex(string $regex): self
     {
         $this->regex = $regex;

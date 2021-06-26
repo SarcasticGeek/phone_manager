@@ -13,11 +13,19 @@ class CustomerDataBuilder implements CustomerDataBuilderInterface
      */
     private $phoneValidator;
 
+    /**
+     * @param PhoneValidatorInterface $phoneValidator
+     */
     public function __construct(PhoneValidatorInterface $phoneValidator)
     {
         $this->phoneValidator = $phoneValidator;
     }
 
+    /**
+     * @param CustomerEntity $customer
+     * @param Country|null $country
+     * @return CustomerModel
+     */
     public function build(CustomerEntity $customer, ?Country $country): CustomerModel
     {
         $customerData = new CustomerModel();

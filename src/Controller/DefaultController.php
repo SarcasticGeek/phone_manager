@@ -3,17 +3,17 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
 {
     /**
-     * @param Request $request
-     *
      * @Route("/", name="main_page")
+     *
+     * @return RedirectResponse
      */
-    public function index(Request $request)
+    public function index(): RedirectResponse
     {
         return $this->redirect($this->generateUrl('customers_index'));
     }

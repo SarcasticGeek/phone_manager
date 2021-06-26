@@ -22,6 +22,11 @@ class CustomerManager implements CustomerManagerInterface
      */
     private $customerDataBuilder;
 
+    /**
+     * @param PaginatorInterface $paginator
+     * @param EntityManagerInterface $entityManager
+     * @param CustomerDataBuilderInterface $customerDataBuilder
+     */
     public function __construct(PaginatorInterface $paginator, EntityManagerInterface $entityManager, CustomerDataBuilderInterface $customerDataBuilder)
     {
         $this->paginator = $paginator;
@@ -29,6 +34,12 @@ class CustomerManager implements CustomerManagerInterface
         $this->customerDataBuilder = $customerDataBuilder;
     }
 
+    /**
+     * @param array $filters
+     * @param int $page
+     * @param int $limit
+     * @return PaginationInterface
+     */
     public function list(array $filters, int $page = PaginationConstant::DEFAULT_PAGE, int $limit = PaginationConstant::DEFAULT_LIMIT): PaginationInterface
     {
         $paginatedCustomers = $this->paginator->paginate(
@@ -40,6 +51,10 @@ class CustomerManager implements CustomerManagerInterface
         return $this->buildPaginatedCustomers($paginatedCustomers);
     }
 
+    /**
+     * @param $paginatedCustomers
+     * @return PaginationInterface
+     */
     private function buildPaginatedCustomers($paginatedCustomers): PaginationInterface
     {
         $builtPaginatedCustomers = [];

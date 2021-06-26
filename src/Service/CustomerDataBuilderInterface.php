@@ -8,5 +8,10 @@ use App\Model\Customer as CustomerModel;
 
 interface CustomerDataBuilderInterface
 {
+    /**
+     * @param CustomerEntity $customer
+     * @param Country|null $country
+     * @return CustomerModel
+     */
     public function build(CustomerEntity $customer, ?Country $country): CustomerModel;
 }

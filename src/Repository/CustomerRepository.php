@@ -16,11 +16,18 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CustomerRepository extends ServiceEntityRepository
 {
+    /**
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Customer::class);
     }
 
+    /**
+     * @param array $filters
+     * @return Query
+     */
     public function list(array $filters): Query
     {
         $queryBuilder = $this->createQueryBuilder('customer');
