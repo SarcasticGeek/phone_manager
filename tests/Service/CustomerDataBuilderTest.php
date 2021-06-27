@@ -5,8 +5,6 @@ namespace App\Tests\Service;
 use App\Entity\Country;
 use App\Entity\Customer;
 use App\Model\Customer as CustomerModel;
-use App\Repository\CountryRepository;
-use App\Service\CountryManager;
 use App\Service\CustomerDataBuilder;
 use App\Service\PhoneValidator;
 use Faker\Factory;
